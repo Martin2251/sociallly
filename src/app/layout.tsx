@@ -25,17 +25,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    
     <html lang="en">
-
+    <ClerkProvider>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        navbar
+      
         {children}
-        footer
+      
       </body>
+      </ClerkProvider>
     </html>
-    </ClerkProvider>
+    
   );
 }
