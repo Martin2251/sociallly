@@ -9,6 +9,17 @@ export async function syncUser(){
         const user = await currentUser();
 
         if(!userId || !user) return ;
+
+        // check for user
+        const existingUser = await prisma.user.findUnique({
+            where: {
+              clerkId: userId,
+            },
+          });
+      
+          if (existingUser) return existingUser;
+
+
         const dbUser = await prisma.user.create({
             data:{
                 clerkId: userId,
@@ -18,8 +29,10 @@ export async function syncUser(){
                 image: user.imageUrl,
             }
         })
+        return dbUser;
         
     } catch (error) {
+        console.log("error in sync user", error)
         
     }
 }
